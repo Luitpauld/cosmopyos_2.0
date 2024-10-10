@@ -6,15 +6,15 @@ class Scene3 extends Phaser.Scene {
         this.background = this.add.tileSprite(0,0, config.width, 200, "lvl2_bg");
         this.background.setOrigin(0,0).setScale(3);  
 
-        this.meteor1 = this.physics.add.sprite(config.width/2, config.heigth/2, "meteor1");
+        this.meteor1 = this.physics.add.sprite(config.width, config.heigth, "meteor1");
         this.meteor1.setOrigin().setScale(2);
-        this.meteor2 = this.physics.add.sprite(config.width/2, config.heigth/2, "meteor1");
+        this.meteor2 = this.physics.add.sprite(config.width, config.heigth, "meteor1");
         this.meteor2.setOrigin().setScale(2);
-        this.meteor3 = this.physics.add.sprite(config.width/2, config.heigth/2, "meteor1");
+        this.meteor3 = this.physics.add.sprite(config.width, config.heigth, "meteor1");
         this.meteor3.setOrigin().setScale(2);
-        this.meteor4 = this.physics.add.sprite(config.width/2, config.heigth/2, "meteor1");
+        this.meteor4 = this.physics.add.sprite(config.width, config.heigth, "meteor1");
         this.meteor4.setOrigin().setScale(2);
-        this.meteor5 = this.physics.add.sprite(config.width/2, config.heigth/2, "meteor1");
+        this.meteor5 = this.physics.add.sprite(config.width, config.heigth, "meteor1");
         this.meteor5.setOrigin().setScale(2);
 
         this.dog = this.physics.add.sprite(config.width/2, config.height/2, "dog");
@@ -34,7 +34,11 @@ class Scene3 extends Phaser.Scene {
         music.on('complete', ()=> this.finishFunc());
         music.play();  
 
-        //this.physics.add.overlap(this.dog, this.meteor1, this.collideMeteor, null, this);
+        this.physics.add.overlap(this.dog, this.meteor1, this.collideMeteor, null, this);
+        this.physics.add.overlap(this.dog, this.meteor2, this.collideMeteor, null, this);
+        this.physics.add.overlap(this.dog, this.meteor3, this.collideMeteor, null, this);
+        this.physics.add.overlap(this.dog, this.meteor4, this.collideMeteor, null, this);
+        this.physics.add.overlap(this.dog, this.meteor5, this.collideMeteor, null, this);
         
     }
 
@@ -58,8 +62,11 @@ class Scene3 extends Phaser.Scene {
         meteor.y = Phaser.Math.Between(20, config.height -20);
     }
     
-   collideMeteor(dog, meteor) {
-        meteor.disableBody(true, true);
+    collideMeteor(dog, meteor) {
+    
+        dog.play("bang_anim");
+        this.dog.setOrigin().setScale(1.3);
+        setTimeout(()=>dog.disableBody(true, true), 700);
     }
 
     update(){

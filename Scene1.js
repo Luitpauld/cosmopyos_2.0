@@ -28,6 +28,10 @@ class Scene1 extends Phaser.Scene {
             frameWidth: 81,
             frameHeight: 52
         });
+        this.load.spritesheet("bang", "img/bang.png", {
+            frameWidth: 192,
+            frameHeight: 225
+        });
 
     }
 
@@ -75,6 +79,12 @@ class Scene1 extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers("dog"),
             frameRate: 10,
             repeat: -1
+        });
+        this.anims.create({
+            key: "bang_anim",
+            frames: this.anims.generateFrameNumbers("bang"),
+            frameRate: 10,
+            
         });
 
         
